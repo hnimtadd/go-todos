@@ -9,5 +9,5 @@ type SignUpRepsonse struct {
 type SignUpRequest struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
-	Limi     int    `json:"limit"`
+	Limit    int    `json:"limit"`
 }
