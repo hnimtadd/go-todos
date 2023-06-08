@@ -6,7 +6,7 @@ type TodoResponse struct {
 	Id        string
 	Content   string
 	CreatedAt time.Time
-	UpdatedAt time.Time
+	CreatedBy string
 }
 
 type TodoRequest struct {
