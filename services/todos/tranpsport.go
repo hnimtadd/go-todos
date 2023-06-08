@@ -1,7 +1,9 @@
 package todos
 
+import "github.com/labstack/echo/v4"
+
 type TodoTransport interface {
-	GetAll()
-	GetUserTodos()
-	AddTodo()
+	GetAll() echo.HandlerFunc
+	GetUserTodos() echo.HandlerFunc
+	AddTodo() echo.HandlerFunc
 }

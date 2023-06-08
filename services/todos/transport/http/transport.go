@@ -17,7 +17,7 @@ type todoTransport struct {
 	todoUc todos.UseCase
 }
 
-func NewTodoTranposrt(todoUC todos.UseCase) *todos.TodoTransport {
+func NewTodoTranposrt(todoUC todos.UseCase) todos.TodoTransport {
 	return &todoTransport{
 		todoUc: todoUC,
 	}
