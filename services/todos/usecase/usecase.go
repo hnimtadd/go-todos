@@ -6,6 +6,7 @@ import (
 	"cleanArch/todos/services/todos"
 	"context"
 	"errors"
+	"fmt"
 	"time"
 
 	"github.com/google/uuid"
@@ -31,9 +32,11 @@ func (tu todoUsecase) CreateTodo(ctx context.Context, userId, content string) er
 		CreatedBy: userId,
 	}
 	count, err := tu.todoRepo.CountTodo(ctx, userId)
+
 	if err != nil {
 		return err
 	}
+	fmt.Println("hrllo")
 
 	user, err := tu.userRepo.GetUserById(ctx, userId)
 	if err != nil {

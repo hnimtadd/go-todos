@@ -25,6 +25,9 @@ func (at *authTransport) SignIn() echo.HandlerFunc {
 		if err := utils.ReadRequest(ctx, input); err != nil {
 			return echo.NewHTTPError(http.StatusBadRequest)
 		}
+		if input.Username == "" || input.Password == "" {
+			return echo.NewHTTPError(http.StatusBadRequest)
+		}
 		token, err := at.authUc.SignIn(ctx.Request().Context(), input.Username, input.Password)
 		if err != nil {
 			if err == auth.ErrUserNotFount {
@@ -42,6 +45,9 @@ func (at *authTransport) SignUp() echo.HandlerFunc {
 	return func(ctx echo.Context) error {
 		input := &presenter.SignUpRequest{}
 		if err := utils.ReadRequest(ctx, input); err != nil {
+			return echo.NewHTTPError(http.StatusBadRequest)
+		}
+		if input.Username == "" || input.Password == "" || input.Limit < 0 {
 			return echo.NewHTTPError(http.StatusBadRequest)
 		}
 		user, err := at.authUc.SignUp(ctx.Request().Context(), input.Username, input.Password, input.Limit)

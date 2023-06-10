@@ -11,6 +11,7 @@ import (
 
 func GetPostGresInstace(cfg *config.Configuration, migrate bool) *gorm.DB {
 	dsn := cfg.DatabaseConnectionURL
+	fmt.Printf(dsn)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		fmt.Println(err)

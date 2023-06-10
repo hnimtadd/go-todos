@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"context"
+
 	"gorm.io/gorm"
 )
 
@@ -28,7 +29,7 @@ func (ur *UserGormRepository) GetUserByUsername(ctx context.Context, username st
 	var user model.User
 	err := ur.db.WithContext(ctx).Where(&model.User{
 		Username: strings.ToLower(username),
-	}).Limit(1).First(&user).Error
+	}).First(&user).Error
 	if err != nil {
 		return nil, err
 	}
@@ -36,12 +37,15 @@ func (ur *UserGormRepository) GetUserByUsername(ctx context.Context, username st
 }
 func (ur *UserGormRepository) GetUserById(ctx context.Context, userId string) (*model.User, error) {
 	var user model.User
+
 	err := ur.db.WithContext(ctx).Where(&model.User{
 		Id: userId,
 	}).First(&user).Error
+
 	if err != nil {
 		return nil, err
 	}
+
 	return &user, nil
 
 }

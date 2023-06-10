@@ -4,6 +4,7 @@ import (
 	authRepository "cleanArch/todos/services/auth/repository"
 	authHttp "cleanArch/todos/services/auth/transport/http"
 	authUsecase "cleanArch/todos/services/auth/usecase"
+	"cleanArch/todos/services/middlewares"
 
 	todoRepository "cleanArch/todos/services/todos/repository"
 	todoHttp "cleanArch/todos/services/todos/transport/http"
@@ -29,8 +30,9 @@ func (s *Server) MapTransport(c *echo.Echo) error {
 	authGroup := v1.Group("/auth")
 	todoGroup := v1.Group("/todos")
 
+	mw := middlewares.NewMiddlewareManager(authUC)
 	authHttp.MapAuthTransport(authGroup, authTransport)
-	todoHttp.MapTodosTransport(todoGroup, todoTransport)
+	todoHttp.MapTodosTransport(todoGroup, todoTransport, mw)
 
 	return nil
 }

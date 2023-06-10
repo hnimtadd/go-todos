@@ -9,7 +9,6 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
 )
 
@@ -34,12 +33,9 @@ func (tt *todoTransport) GetAll() echo.HandlerFunc {
 }
 func (tt *todoTransport) GetUserTodos() echo.HandlerFunc {
 	return func(ctx echo.Context) error {
-		rawId := ctx.Param(auth.CtxUserKey)
-		userId, err := uuid.Parse(rawId)
-		if err != nil {
-			return ctx.JSON(http.StatusBadRequest, err.Error())
-		}
-		todos, err := tt.todoUc.GetTodosByUserId(ctx.Request().Context(), userId.String())
+		userId := ctx.Get(auth.CtxUserKey)
+		fmt.Println(userId)
+		todos, err := tt.todoUc.GetTodosByUserId(ctx.Request().Context(), fmt.Sprintf("%v", userId))
 		if err != nil {
 			return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 		}
