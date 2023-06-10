@@ -7,6 +7,7 @@
 - HTPP framework: ```Echo```
 - DB: ```Postgres```
 - Deployment: ```Docker```
+- DB dashboard: ```Adminer```
 
 ### Overview
 - Use JWT for validation
@@ -42,6 +43,7 @@
     ```bash
     docker-compose up -d
     ```
+- Manager postgres state by adminer: access to ```https:localhost:8060```
 ### api:
 
 #### Register:
